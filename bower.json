@@ -1,0 +1,6 @@
+{
+  "name": "auth-api",
+  "dependencies": {
+    "mobile-angular-ui": "^1"
+  }
+}

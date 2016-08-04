@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  .groups
+    .scrollable
+      .section.scrollable-content
+        legend Groups
+        for user in users
+          a.btn.btn-primary.btn-block(href='/groups?user_id=#{user.id}' role='button')
+            h2 #{user.group.name}
+            div #{user.name}

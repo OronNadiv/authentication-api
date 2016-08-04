@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  .scrollable
+    .section.scrollable-content
+      form(action='/', method='post', role='form')
+        fieldset
+          legend Login
+          .form-group
+            label Email
+            input.form-control#email(type='email', name='email', placeholder='Enter email', required)
+          .form-group
+            label Password
+            input.form-control#password(type='password', name='password', placeholder='Password', required)
+        hr
+        if error
+          strong
+            p.error.text-danger.text-center= error
+        button.btn.btn-primary.btn-block(type='submit') Login

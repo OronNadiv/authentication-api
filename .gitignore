@@ -1,0 +1,7 @@
+coverage
+node_modules
+**/public/components
+**/*.css
+**/*.html
+**/*.log
+**/*.log.*

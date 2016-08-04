@@ -1,0 +1,66 @@
+{
+  "name": "home-automation-auth",
+  "private": true,
+  "author": "Oron Nadiv <oron@nadiv.us> (https://github.com/OronNadiv/)",
+  "homepage": "https://github.com/OronNadiv/home-automation-auth/",
+  "bugs": "https://github.com/OronNadiv/home-automation-auth/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OronNadiv/home-automation-auth.git"
+  },
+  "license": "AGPL-3.0",
+  "cacheDirectories": [
+    "node_modules",
+    "public/components"
+  ],
+  "engines": {
+    "node": "^6",
+    "npm": "^3"
+  },
+  "scripts": {
+    "cover": "istanbul cover _mocha -- --recursive -t 10000",
+    "lint": "eslint .",
+    "start": "node src/app.js",
+    "test": "mocha --recursive -t 10000 && npm run lint",
+    "test-coveralls": "istanbul cover _mocha --report lcovonly -- --recursive -t 10000 -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "migrate": "./bin/migrate",
+    "postinstall": "bower install && npm run migrate up"
+  },
+  "dependencies": {
+    "bcrypt": "^0.8",
+    "bluebird": "^3",
+    "body-parser": "^1",
+    "bookshelf": "^0.10",
+    "bookshelf-deep-changed-plugin": "^1",
+    "bower": "^1",
+    "cookie-parser": "^1",
+    "cookie-session": "^1",
+    "cors": "^2",
+    "diehard": "^1",
+    "express": ">=4.5 <5",
+    "jsonwebtoken": "^7",
+    "knex": "^0.11",
+    "knex-pg-customschema": "^1",
+    "pg": "^6",
+    "pug": "^2.0.0-beta4",
+    "serve-favicon": "^2",
+    "stylus": "^0.54",
+    "underscore": "^1",
+    "winston": "^2"
+  },
+  "devDependencies": {
+    "chance": "^1",
+    "coveralls": "^2",
+    "eslint": "^3",
+    "eslint-config-standard": "^5",
+    "eslint-plugin-promise": "^2",
+    "eslint-plugin-standard": "^2",
+    "factory-girl": "^3",
+    "factory-girl-bookshelf": "^1",
+    "istanbul": "^0.4",
+    "mocha": "^3",
+    "should": "^10",
+    "supertest": "^2",
+    "supertest-as-promised": "^3"
+  }
+}
