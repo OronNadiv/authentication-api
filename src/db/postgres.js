@@ -1,8 +1,5 @@
-const path = require('path')
-const LOG_PREFIX = `"${path.basename(__filename)}":`
-const log = require('../logger')
-const verbose = log.verbose.bind(log, LOG_PREFIX)
-const error = log.error.bind(log, LOG_PREFIX)
+const verbose = require('debug')('ha:db:bookshelf:verbose')
+const error = require('debug')('ha:db:postgres:error')
 
 const pg = require('pg')
 const config = require('../config')

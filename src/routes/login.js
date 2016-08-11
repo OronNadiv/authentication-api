@@ -1,7 +1,4 @@
-const path = require('path')
-const LOG_PREFIX = `"${path.basename(__filename)}":`
-const log = require('../logger')
-const warn = log.warn.bind(log, LOG_PREFIX)
+const warn = require('debug')('ha:routes:login:warn')
 
 const {Router} = require('express')
 const _ = require('underscore')

@@ -1,7 +1,4 @@
-const path = require('path')
-const LOG_PREFIX = `"${path.basename(__filename)}":`
-const log = require('../../logger')
-const verbose = log.verbose.bind(log, LOG_PREFIX)
+const verbose = require('debug')('ha:db:models:generate-token:verbose')
 
 const config = require('../../config')
 const jwt = require('jsonwebtoken')

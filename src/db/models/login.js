@@ -1,7 +1,4 @@
-const path = require('path')
-const LOG_PREFIX = `"${path.basename(__filename)}":`
-const log = require('../../logger')
-const info = log.info.bind(log, LOG_PREFIX)
+const info = require('debug')('ha:db:models:login:info')
 
 const bcrypt = require('bcrypt')
 const Bookshelf = require('../bookshelf')
