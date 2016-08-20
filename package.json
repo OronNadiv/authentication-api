@@ -38,7 +38,7 @@
     "cors": "^2",
     "debug": "^2",
     "diehard": "^1",
-    "express": ">=4.5 <5",
+    "express": "^4.5",
     "jsonwebtoken": "^7",
     "knex": "^0.11",
     "knex-pg-customschema": "^1",
@@ -59,8 +59,8 @@
     "factory-girl-bookshelf": "^1",
     "istanbul": "^0.4",
     "mocha": "^3",
-    "should": "^10",
+    "should": "^11",
     "supertest": "^2",
-    "supertest-as-promised": "^3"
+    "supertest-as-promised": "^4"
   }
 }
