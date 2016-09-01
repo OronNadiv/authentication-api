@@ -1,6 +1,7 @@
-# Home Automation - Authentication Backend API
-This server manages the authentication process using [JWT][jwt] (Javascript Web Token).
-It allows the administrator to activate/deactivate other users, create new users, change password, change permissions, and more.
+# Home Automation - Authentication API
+Back-end server that handles authentications and permissions. Main functions are:
+* It issues [JWT][jwt] (Javascript Web Token) to other back-end servers, UI and raspberry pi clients.
+* It allows creation of new users, enabling/disabling access, changing permissions and more.
 
 [![JavaScript Style Guide][standard-image]][standard-url]
 [![Dependencies][dependencies-image]][dependencies-url]
