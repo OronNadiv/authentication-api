@@ -44,6 +44,8 @@ if (!config.sessionSecret) {
   process.exit(1)
 }
 
+config.skipSSL = process.env.SKIP_SSL && process.env.SKIP_SSL.toUpperCase() === 'TRUE'
+
 config.uiUrl = process.env.UI_URL || 'http://localhost:3000'
 
 module.exports = config
