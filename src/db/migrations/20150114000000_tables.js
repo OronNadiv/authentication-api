@@ -3,7 +3,7 @@ module.exports = {
     return knex.transaction(trx => {
       return Promise
         .resolve(trx.raw('DROP EXTENSION IF EXISTS citext;'))
-        .then(trx.raw.bind(trx, 'CREATE EXTENSION citext;'))
+        .then(() => trx.raw('CREATE EXTENSION citext;'))
         .then(() => {
           return trx.schema.createTable('logins', table => {
             table.increments('id').primary()
