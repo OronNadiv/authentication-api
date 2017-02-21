@@ -96,8 +96,10 @@ router.patch('/:id', (req, res, next) => {
         return res.sendStatus(404)
       }
 
-      req.body.is_admin = req.body.role === 'admin'
-      req.body.is_trusted = req.body.role === 'admin' || req.body.role === 'trusted'
+      if (req.body.role) {
+        req.body.is_admin = req.body.role === 'admin'
+        req.body.is_trusted = req.body.role === 'admin' || req.body.role === 'trusted'
+      }
 
       return user.save(_.pick(req.body, 'is_active', 'is_trusted', 'is_admin', 'name'), options)
         .then(function (user) {
