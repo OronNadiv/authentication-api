@@ -20,7 +20,7 @@ router.post('/', (req, res, next) => {
       email: req.body.email,
       password: req.body.password
     }, options)
-    .then(function (login) {
+    .then((login) => {
       verbose('login:', login.toJSON())
       return User.forge().save({
         name: req.body.name,
@@ -29,12 +29,12 @@ router.post('/', (req, res, next) => {
         group_id: req.client.group_id
       })
     })
-    .then(function (user) {
+    .then((user) => {
       return UserExtended.forge()
         .query({where: {id: user.id}})
         .fetch()
         .call('toJSON')
-        .then(res.json.bind(res))
+        .then((result) => res.json(result))
     })
     .catch(next)
 })
@@ -49,13 +49,13 @@ router.get('/', (req, res, next) => {
     return res.sendStatus(403)
   }
   UserExtended.forge()
-    .query(function (qb) {
+    .query((qb) => {
       qb.where('group_id', '=', options.by.group_id)
       qb.orderBy('name')
     })
     .fetchAll(options)
     .call('toJSON')
-    .then(res.json.bind(res))
+    .then((result) => res.json(result))
     .catch(next)
 })
 
@@ -65,18 +65,18 @@ router.get('/:id', (req, res, next) => {
     return res.sendStatus(403)
   }
   UserExtended.forge()
-    .query(function (qb) {
+    .query((qb) => {
       qb.where('group_id', '=', options.by.group_id)
       qb.where('id', '=', req.params.id)
     })
     .fetch(options)
-    .then(function (user) {
+    .then((user) => {
       if (!user) {
         return res.sendStatus(404)
       }
       return user.toJSON()
     })
-    .then(res.json.bind(res))
+    .then((result) => res.json(result))
     .catch(next)
 })
 
@@ -86,12 +86,12 @@ router.patch('/:id', (req, res, next) => {
     return res.sendStatus(403)
   }
   User.forge()
-    .query(function (qb) {
+    .query((qb) => {
       qb.where('id', '=', req.params.id)
       qb.where('group_id', '=', options.by.group_id)
     })
     .fetch(options)
-    .then(function (user) {
+    .then((user) => {
       if (!user) {
         return res.sendStatus(404)
       }
@@ -102,12 +102,12 @@ router.patch('/:id', (req, res, next) => {
       }
 
       return user.save(_.pick(req.body, 'is_active', 'is_trusted', 'is_admin', 'name'), options)
-        .then(function (user) {
+        .then((user) => {
           return UserExtended.forge()
             .query({where: {id: user.id}})
             .fetch()
             .call('toJSON')
-            .then(res.json.bind(res))
+            .then((result) => res.json(result))
         })
     })
     .catch(next)

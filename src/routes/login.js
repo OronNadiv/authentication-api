@@ -22,13 +22,14 @@ authenticated.patch('/:id', (req, res, next) => {
       }
     })
     .fetch({withRelated: ['login']})
-    .then(function (user) {
+    .then((user) => {
       if (!user) {
         return res.sendStatus(404)
       }
       const login = user.related('login')
-      return login.save({password: req.body.password, failed_login_attempts: 0})
-        .then(res.sendStatus.bind(res, 204))
+      return login
+        .save({password: req.body.password, failed_login_attempts: 0})
+        .then(() => res.sendStatus(204))
     })
     .catch(next)
 })

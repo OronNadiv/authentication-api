@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const config = require('../config')
 
 module.exports = (req, res, next) => {
-  function sendUnauthenticated () {
+  const sendUnauthenticated = () => {
     info('Sending unauthorized - 401.')
     return res.sendStatus(401)
   }
