@@ -1,7 +1,6 @@
 const error = require('debug')('ha:config:error')
 
 const fs = require('fs')
-const knexPgCustomSchema = require('knex-pg-customschema')
 const path = require('path')
 
 const config = {production: process.env.NODE_ENV && process.env.NODE_ENV.toUpperCase() === 'PRODUCTION'}
@@ -33,7 +32,7 @@ config.postgresPool = {
   min: parseInt(process.env.POSTGRESPOOLMIN || 2, 10),
   max: parseInt(process.env.POSTGRESPOOLMAX || 10, 10),
   log: process.env.POSTGRESPOOLLOG === 'true',
-  afterCreate: knexPgCustomSchema('public')
+  afterCreate: (connection, cb) => connection.query(`SET SESSION SCHEMA 'public';`, cb)
 }
 
 config.sessionSecret = process.env.SESSION_SECRET || (config.production ? null : 'This is session secret')
