@@ -42,7 +42,7 @@
     "jsonwebtoken": "^7",
     "knex": "^0.12.2",
     "make-error": "^1.2.1",
-    "pg": "^6",
+    "pg": "^6.4.2",
     "pug": "^2.0.0-beta4",
     "serve-favicon": "^2",
     "stylus": "^0.54",
