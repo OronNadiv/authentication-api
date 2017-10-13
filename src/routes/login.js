@@ -1,4 +1,5 @@
 const warn = require('debug')('ha:routes:login:warn')
+const error = require('debug')('ha:routes:login:error')
 
 const {Router} = require('express')
 const config = require('../config')
@@ -71,7 +72,9 @@ unauthenticated.post('/', (req, res, next) => {
       }
 
       const user = users[0]
-      const token = user.generateToken()
+      return Promise.props({token: user.generateToken(), user})
+    })
+    .then(({token, user}) => {
       res.cookie('XSRF-TOKEN', token, {
         httpOnly: false, // The cookie is being used by the javascript code.
         secure: config.production,

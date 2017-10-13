@@ -1,4 +1,4 @@
-const verbose = require('debug')('ha:routes:tokens:verbose')
+const verbose = require('debug')('ha:routes:groups:verbose')
 
 const Promise = require('bluebird')
 const {Router} = require('express')
@@ -12,8 +12,8 @@ router.post('/', (req, res, next) => {
   if (!req.machine) {
     return res.sendStatus(401)
   }
-  Promise.resolve()
-    .then(() => req.machine.generateToken(req.audience))
+  Promise
+    .try(() => req.machine.generateToken(req.audience))
     .then(token => res.json({token: token}))
     .catch(next)
 })
