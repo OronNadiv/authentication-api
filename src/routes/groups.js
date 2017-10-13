@@ -45,14 +45,22 @@ router.get('/', (req, res) => {
         return res.redirect('/')
       }
       const user = login.related('users').at(0)
-      const token = user.generateToken()
-      res.cookie('XSRF-TOKEN', token, {
-        httpOnly: false, // The cookie is being used by the javascript code.
-        secure: config.production,
-        domain: config.apiTokenCookieDomain,
-        maxAge: user.get('token_expires_in_minutes') * 60 * 1000
-      })
-      res.redirect(config.uiUrl)
+      return user.generateToken()
+        .then((token) => {
+          const tokenExpiresInMinutes = user.get('token_expires_in_minutes')
+
+          res.cookie(
+            'XSRF-TOKEN',
+            token,
+            {
+              httpOnly: false, // The cookie is being used by the javascript code.
+              secure: config.production,
+              domain: config.apiTokenCookieDomain,
+              maxAge: tokenExpiresInMinutes * 60 * 1000
+            })
+
+          res.redirect(config.uiUrl)
+        })
     })
 })
 

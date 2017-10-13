@@ -34,6 +34,7 @@ module.exports = (req, res, next) => {
     verbose('user has been validated.', payload)
 
     req.client = payload
+    req.client.token = token
     return next()
   })
 }
