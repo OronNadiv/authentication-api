@@ -3,6 +3,8 @@ const verbose = require('debug')('ha:db:models:generate-token:verbose')
 const config = require('../../config')
 const jwt = require('jsonwebtoken')
 const {grant} = require('home-automation-pubnub').Authority
+const uuid = 'authentication-api'
+const serverKeyRegExp = /^urn:home-automation\/.+$/gi
 
 module.exports = function (audience) { // keep it as function since we use 'this'.
   verbose('generateToken was called.  audience:', audience)
@@ -22,7 +24,14 @@ module.exports = function (audience) { // keep it as function since we use 'this
   )
 
   const groupId = this.get('group_id')
-  const isTrusted = !!this.get('is_trusted')
-  return grant({token, tokenExpiresInMinutes, groupId, isTrusted, uuid: 'authentication-api'})
-    .return(token)
+  // if it's a machine and it's key matches "serverKeyRegExp", then it's a server and therefore it's trusted.
+  const isTrusted = !!this.get('is_trusted') || serverKeyRegExp.test(this.get('key'))
+  verbose('calling grant.', 'isTrusted:', isTrusted, 'User/machine:', this.toJSON())
+  return grant({
+    token,
+    tokenExpiresInMinutes,
+    groupId,
+    isTrusted,
+    uuid
+  }).return(token)
 }
