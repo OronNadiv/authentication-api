@@ -23,6 +23,6 @@ module.exports = function (audience) { // keep it as function since we use 'this
 
   const groupId = this.get('group_id')
   const isTrusted = !!this.get('is_trusted')
-  return grant({token, tokenExpiresInMinutes, groupId, isTrusted})
+  return grant({token, tokenExpiresInMinutes, groupId, isTrusted, uuid: 'authentication-api'})
     .return(token)
 }
