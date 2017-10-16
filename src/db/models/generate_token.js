@@ -4,7 +4,7 @@ const config = require('../../config')
 const jwt = require('jsonwebtoken')
 const {grant} = require('home-automation-pubnub').Authority
 const uuid = 'authentication-api'
-const serverKeyRegExp = /^urn:home-automation\/.+$/gi
+const serverKeyRegExp = /^urn:home-automation\//i
 
 module.exports = function (audience) { // keep it as function since we use 'this'.
   verbose('generateToken was called.  audience:', audience)
@@ -25,8 +25,16 @@ module.exports = function (audience) { // keep it as function since we use 'this
 
   const groupId = this.get('group_id')
   // if it's a machine and it's key matches "serverKeyRegExp", then it's a server and therefore it's trusted.
-  const isTrusted = !!this.get('is_trusted') || serverKeyRegExp.test(this.get('key'))
-  verbose('calling grant.', 'isTrusted:', isTrusted, 'User/machine:', this.toJSON())
+  const key = this.get('key')
+  const isTrustedProp = !!this.get('is_trusted')
+  const isTrustedRegexp = serverKeyRegExp.test(key)
+  const isTrusted = isTrustedProp || isTrustedRegexp
+  verbose('calling grant.',
+    'key:', key,
+    'isTrustedProp:', isTrustedProp,
+    'isTrustedRegexp:', isTrustedRegexp,
+    'isTrusted:', isTrusted,
+    'User/machine:', this.toJSON())
   return grant({
     token,
     tokenExpiresInMinutes,

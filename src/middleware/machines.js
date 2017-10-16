@@ -35,7 +35,12 @@ module.exports = (req, res, next) => {
 
       jwt.verify(token, machine.get('public_key'), err => {
         if (err) {
-          return next(err)
+          warn('machine token could not be validated.',
+            'iss:', payload.iss,
+            // 'token:', token,
+            'payload:', payload,
+            'err:', err)
+          return res.sendStatus(401)
         }
 
         verbose(
