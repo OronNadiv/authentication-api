@@ -6,11 +6,18 @@ const jwt = require('jsonwebtoken')
 const Machine = require('../db/models/machine')
 
 module.exports = (req, res, next) => {
-  if (!req.headers.authorization || !/^Bearer .*/.test(req.headers.authorization)) {
+  let token
+
+  if (req.headers.authorization) {
+    const matched = req.headers.authorization.match(/Bearer (.+)/)
+    if (matched.length > 1) {
+      token = matched[1]
+    }
+  }
+  if (!token) {
     return next()
   }
 
-  const token = req.headers.authorization.match(/^Bearer (.*)$/)[1]
   const payload = jwt.decode(token)
 
   if (!/urn:home-automation\/.+/.test(payload.aud) ||

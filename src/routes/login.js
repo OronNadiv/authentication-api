@@ -78,7 +78,8 @@ unauthenticated.post('/', (req, res, next) => {
         httpOnly: false, // The cookie is being used by the javascript code.
         secure: config.production,
         domain: config.apiTokenCookieDomain,
-        maxAge: user.get('token_expires_in_minutes') * 60 * 1000
+        maxAge: user.get('token_expires_in_minutes') * 60 * 1000,
+        sameSite: 'strict'
       })
       res.redirect(config.uiUrl)
     })
