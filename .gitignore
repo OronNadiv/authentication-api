@@ -4,5 +4,4 @@ node_modules
 **/*.css
 **/*.html
 **/*.log
-package-lock.json
 **/*.pem
