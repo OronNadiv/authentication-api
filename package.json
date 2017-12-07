@@ -39,7 +39,7 @@
     "debug": "^3.1.0",
     "diehard": "^1.5.2",
     "express": "^4.5",
-    "home-automation-pubnub": "^0.4.5",
+    "home-automation-pubnub": "^0.4.6",
     "jsonwebtoken": "^8.1.0",
     "knex": "^0.13.0",
     "make-error": "^1.2.1",
