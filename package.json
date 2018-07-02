@@ -31,7 +31,7 @@
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
     "bookshelf": "^0.13.3",
-    "bookshelf-deep-changed-plugin": "^1.0.4",
+    "bookshelf-deep-changed-plugin": "^1.1.0",
     "bower": "^1.8.4",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^1",
