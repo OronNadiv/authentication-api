@@ -5,5 +5,4 @@ node_modules
 **/*.html
 **/*.log
 **/*.pem
-package-lock.json
 .snyk
